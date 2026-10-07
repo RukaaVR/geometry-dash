@@ -101,6 +101,11 @@ export class LevelBuilder {
     this.add('orb_' + color, cx + 0.5, cy + 0.5, { g: opts.g });
     return this;
   }
+  /** Wall from y=3 upward just before cell cx so a ground-level portal at cx+1 cannot be skipped. */
+  funnel(cx, top = 22) {
+    for (let y = 3; y < top; y++) this.add('block', cx + 0.5, y + 0.5, { p: { style: 'solid' } });
+    return this;
+  }
   /** Mode portal centred vertically at y (world units). */
   portal(mode, cx, y, opts = {}) {
     this.add('portal_' + mode, cx + 0.5, y, { p: opts.corridor !== undefined ? { corridor: opts.corridor } : undefined });

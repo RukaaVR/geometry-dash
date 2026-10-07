@@ -72,6 +72,7 @@ export function buildLevel1() {
   section(b, shipStart, { bg: '#8a22b8', ground: '#6a1a90', line: '#ffd6ff' }, 0.2);
   b.flash(shipStart, '#ffffff', 0.35, 0.4);
   b.beat(shipStart, true, 1, 0.8);
+  b.funnel(shipStart - 1);
   b.portal('ship', shipStart, 1.5);
   const pillars = [
     [10, 'floor', 3], [16, 'ceil', 4], [22, 'floor', 4], [28, 'ceil', 4], [34, 'floor', 3],
