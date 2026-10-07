@@ -224,7 +224,7 @@ export class EditorScene {
     }
     if (same && d.rotatable) insp.append(row('Rotation', num(first.r || 0, 15, (v) => edit((o) => (o.r = v), 'Rotate'))));
     if (same && d.scalable) insp.append(row('Scale', num(first.s || 1, 0.25, (v) => edit((o) => (o.s = v), 'Scale'))));
-    insp.append(h('div.ed-row2',
+    if (d.kind !== 'trigger' && d.kind !== 'startpos') insp.append(h('div.ed-row2',
       h('button.ed-chip' + (first.fx ? '.on' : ''), { type: 'button', on: { click: () => this.flip('x') } }, icon('flipH'), 'Flip H'),
       h('button.ed-chip' + (first.fy ? '.on' : ''), { type: 'button', on: { click: () => this.flip('y') } }, icon('flipV'), 'Flip V')));
     if (d.kind !== 'trigger' && d.kind !== 'startpos') {

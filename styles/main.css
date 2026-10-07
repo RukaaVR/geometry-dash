@@ -677,7 +677,7 @@ select.ed-input { padding: 0 4px; }
 .ed-color-field .ed-color { width: 42px; flex: none; }
 
 @media (max-width: 1440px) {
-  .ed-tool span, .ed-test:not(.primary) span { display: none; }
+  .ed-tool > span:not(.ico), .ed-test:not(.primary) > span:not(.ico), .ed-name small { display: none; }
   .ed-name { max-width: 180px; }
 }
 @media (max-width: 900px) {
@@ -685,7 +685,7 @@ select.ed-input { padding: 0 4px; }
   .ed-right { display: none; }
   .ed-palette { grid-template-columns: repeat(2, 1fr); }
   .ed-cats { grid-template-columns: repeat(3, 1fr); }
-  .ed-tool span, .ed-test span, .ed-save span, .ed-name small { display: none; }
+  .ed-tool > span:not(.ico), .ed-test > span:not(.ico), .ed-save > span:not(.ico), .ed-name small { display: none; }
   .ed-settings { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {

@@ -231,7 +231,7 @@ const dark = (c, k = 0.86) => mixRgb(c, BLACK, k);
 function blockStyleColors(style, col) {
   switch (style) {
     case 'solid':
-      return { fill: rgbCss(mixRgb(col, BLACK, 0.45)), stroke: rgbCss(col), detail: rgbCss(mixRgb(col, WHITE, 0.3), 0.35) };
+      return { fill: rgbCss(mixRgb(col, BLACK, 0.8)), stroke: rgbCss(col), detail: rgbCss(col, 0.18) };
     case 'glass':
       return { fill: rgbCss(col, 0.14), stroke: rgbCss(col, 0.9), detail: rgbCss(col, 0.4) };
     case 'outline':
