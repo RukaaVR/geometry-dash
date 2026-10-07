@@ -21,7 +21,12 @@ export function h(sel, props, ...children) {
     for (const [k, v] of Object.entries(props)) {
       if (v === undefined || v === null || v === false) continue;
       if (k === 'on') for (const [ev, fn] of Object.entries(v)) el.addEventListener(ev, fn);
-      else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
+      else if (k === 'style' && typeof v === 'object') {
+        for (const [sk, sv] of Object.entries(v)) {
+          if (sk.startsWith('--')) el.style.setProperty(sk, String(sv));
+          else el.style[sk] = sv;
+        }
+      }
       else if (k === 'html') el.innerHTML = v;
       else if (k === 'text') el.textContent = v;
       else if (k === 'dataset') Object.assign(el.dataset, v);

@@ -594,6 +594,10 @@ textarea.field { font-family: ui-monospace, Menlo, Consolas, monospace; font-siz
   .level-card { gap: 8px; padding: 14px 20px; }
   .lc-desc { display: none; }
   .round-label { display: none; }
+  .cz-stage { flex: none; height: 150px; }
+  .cz-preview-canvas { width: 140px; }
+  .cz-preview { gap: 8px; padding: 10px; overflow-y: auto; }
+  .cz-mode { width: 38px; height: 38px; }
 }
 
 /* ------------------------------------------------------------------ editor */

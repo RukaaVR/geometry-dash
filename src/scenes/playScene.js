@@ -476,7 +476,7 @@ export class PlayScene {
     const s = this.session;
     if (this.app.settings.gameplay.showAttempts && s.attempt > 0) {
       ctx.save();
-      ctx.translate(this.attemptStartX + 5.5, this.camera.groundY + 5.2);
+      ctx.translate(this.attemptStartX + 8, this.camera.groundY + 5.2);
       ctx.scale(0.02, -0.02);
       ctx.font = '700 64px "Russo One", system-ui, sans-serif';
       ctx.textAlign = 'center';

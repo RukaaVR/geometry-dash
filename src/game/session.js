@@ -122,16 +122,20 @@ export class PlaySession {
       this.anchor = { music: this.music ? this.music.position(now) : 0, sim: this.state.time };
       target = this.state.time;
     }
+    // Work in integer ticks: an input at time t belongs to the tick that ends after t.
+    // Both conversions use the same epsilon so an input exactly on a tick boundary
+    // always lands on the same tick, whatever the frame rate.
+    const targetTick = Math.floor(target / DT + 1e-6);
     for (const ev of inputEvents) {
-      const simT = Math.max(this.state.time, target - (now - ev.t) / 1000);
-      this.pending.push({ down: ev.down, t: simT });
+      const simT = target - (now - ev.t) / 1000;
+      const tk = Math.max(this.state.tick + 1, Math.floor(simT / DT + 1e-6) + 1);
+      this.pending.push({ down: ev.down, tk });
     }
-    let steps = 0;
-    while (this.state.time + DT <= target + 1e-9) {
-      const tickEnd = this.state.time + DT;
+    while (this.state.tick < targetTick) {
+      const nextTick = this.state.tick + 1;
       let pressed = false;
       let heldDuring = this.held;
-      while (this.pending.length && this.pending[0].t <= tickEnd) {
+      while (this.pending.length && this.pending[0].tk <= nextTick) {
         const ev = this.pending.shift();
         if (ev.down) {
           pressed = true;
@@ -141,7 +145,6 @@ export class PlaySession {
       }
       this.simEvents.length = 0;
       step(this.world, this.state, { held: heldDuring || this.held, pressed }, this.simEvents);
-      steps++;
       for (const ev of this.simEvents) this.handleSimEvent(ev);
       if (this.state.dead || this.state.complete) break;
       if (this.practice && this.opts.autoCheckpoints) this.maybeAutoCheckpoint();
